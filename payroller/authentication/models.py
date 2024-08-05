@@ -30,7 +30,7 @@ class CustomUserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin, BaseModel):
     email = models.EmailField(unique=True)
-    #companies = models.ManyToManyField('company.Company', related_name='users')
+    companies = models.ManyToManyField('company.Company', related_name='users')
     first_name = models.CharField(max_length=60)
     last_name = models.CharField(max_length=60)
 
