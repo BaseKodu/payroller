@@ -27,7 +27,7 @@ class BankAccount(BaseModel):
     account_holder_name = models.CharField(max_length=200)
     other_bank_name = models.CharField(max_length=200)
 
-'''
+
 class Country(BaseModel):
     name = models.CharField(max_length=100, null=True, blank=True)
     iso2 = models.CharField(max_length=2, null=True, blank=True)
@@ -53,4 +53,3 @@ class City(BaseModel):
 
     def __str__(self):
         return self.name
-'''
