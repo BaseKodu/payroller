@@ -18,7 +18,8 @@ help:
 
 # Build, watch and serve docs with live reload
 livehtml:
-	sphinx-autobuild -b html --open-browser --port 9000 --watch $(APP) -c . $(SOURCEDIR) $(BUILDDIR)/html
+	@mkdir -p _build/html  # Ensure the _build/html directory exists
+	sphinx-autobuild -b html --open-browser --port 9000 --watch $(APP) -c . $(SOURCEDIR) ./_build/html
 
 # Outputs rst files from django application code
 apidocs:
