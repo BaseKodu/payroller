@@ -35,6 +35,7 @@ repos:
         args: [--fix, --exit-non-zero-on-fix]
       # Formatter
       - id: ruff-format
+        args: [--line-length=120]
 
   - repo: https://github.com/Riverside-Healthcare/djLint
     rev: v1.35.2
