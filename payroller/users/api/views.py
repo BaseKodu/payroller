@@ -1,3 +1,4 @@
+from django.contrib.auth import authenticate
 from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.authtoken.models import Token
@@ -40,17 +41,38 @@ class UserViewSet(viewsets.ModelViewSet):
 
 class CustomAuthToken(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(
-            data=request.data,
-            context={"request": request},
-        )
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data["user"]
-        token, created = Token.objects.get_or_create(user=user)
-        return Response(
-            {
-                "token": token.key,
-                "user_id": user.pk,
-                "email": user.email,
-            },
-        )
+        serializer = self.serializer_class(data=request.data, context={"request": request})  # noqa: E501
+        if serializer.is_valid():
+            username = serializer.validated_data["username"]
+            password = serializer.validated_data["password"]
+            user = authenticate(username=username, password=password)
+            if user:
+                token, created = Token.objects.get_or_create(user=user)
+                return Response(
+                    {
+                        "token": token.key,
+                        "user_id": user.pk,
+                        "email": user.email,
+                        "message": "Login successful",
+                    },
+                )
+            return Response(
+                {
+                    "error": "Invalid credentials",
+                },
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+def whoami(request):
+    """
+    A function to return the user's information, email, id, token
+    """
+    return Response(
+        {
+            "user_id": request.user.id,
+            "email": request.user.email,
+            "token": request.auth.key,
+        },
+    )
