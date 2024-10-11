@@ -23,6 +23,7 @@ class CompanyViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
+        serializer.instance.created_by.companies.add(serializer.instance)
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)

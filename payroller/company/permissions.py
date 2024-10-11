@@ -8,4 +8,8 @@ class HasCompanyAccess(permissions.BasePermission):
             return False
 
         # Check if the user is authenticated and has access to this company
-        return request.user.is_authenticated and request.user.companies.filter(id=request.company.id).exists()  # noqa: E501
+        is_authenticated = request.user.is_authenticated
+        user_companies_exists = request.user.companies.filter(
+            id=request.company.id,
+        ).exists()
+        return is_authenticated and user_companies_exists

@@ -6,6 +6,7 @@ from rest_framework.routers import SimpleRouter
 from rest_framework_nested import routers
 
 from payroller.company.api.views import CompanyViewSet
+from payroller.employees.api.views import EmployeeViewSet
 from payroller.users.api.views import CustomAuthToken
 from payroller.users.api.views import UserViewSet
 from payroller.users.api.views import whoami
@@ -17,6 +18,7 @@ router.register("companies", CompanyViewSet, basename="company")
 
 # Create a nested router for employees
 companies_router = routers.NestedSimpleRouter(router, r"companies", lookup="company")
+companies_router.register(r"employees", EmployeeViewSet, basename="company-employees")
 
 urlpatterns = [
     *router.urls,

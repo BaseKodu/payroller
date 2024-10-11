@@ -16,6 +16,7 @@ class PaymentMethodChoices(models.TextChoices):
 class Employee(BaseModel):
     title = models.CharField(max_length=200, blank=True)
     initials = models.CharField(max_length=10, blank=True)
+    first_name = models.CharField(max_length=100, blank=True)
     last_name = models.CharField(max_length=100, blank=True)
     other_names = models.CharField(max_length=200, blank=True)
     dob = models.DateField(null=True, blank=True)
