@@ -20,8 +20,8 @@ class EmployeeViewSet(viewsets.ModelViewSet):
         for the currently authenticated user, for the company
         set in the request.
         """
-        user = self.request.user
-        return Employee.objects.filter(company__created_by=user)
+        company = self.request.company
+        return Employee.objects.filter(company=company)
 
     def perform_create(self, serializer):
         serializer.save(company=self.request.company)
