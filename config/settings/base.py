@@ -88,12 +88,14 @@ THIRD_PARTY_APPS = [
     "rest_framework.authtoken",
     "corsheaders",
     "drf_spectacular",
+    "djmoney",
 ]
 
 LOCAL_APPS = [
     "payroller.users",
     "payroller.company",
     "payroller.employees",
+    "payroller.misc",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -354,3 +356,7 @@ SPECTACULAR_SETTINGS = {
 }
 # Your stuff...
 # ------------------------------------------------------------------------------
+
+# Django Money
+CURRENCIES = ("ZAR",)
+DEFAULT_CURRENCY = "ZAR"
