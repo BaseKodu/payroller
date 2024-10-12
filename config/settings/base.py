@@ -360,3 +360,8 @@ SPECTACULAR_SETTINGS = {
 # Django Money
 CURRENCIES = ("ZAR",)
 DEFAULT_CURRENCY = "ZAR"
+
+
+# simplemaps worldcities files
+
+PATH_TO_WORLDCITIES_FILES = BASE_DIR / "payroller" / "misc" / "data"
