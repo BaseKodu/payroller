@@ -364,4 +364,11 @@ DEFAULT_CURRENCY = "ZAR"
 
 # simplemaps worldcities files
 
-PATH_TO_WORLDCITIES_FILES = BASE_DIR / "payroller" / "misc" / "data"
+PATH_TO_WORLDCITIES_FILES = BASE_DIR / "payroller" / "misc" / "data" / "simplemaps" / "worldcities.xlsx"
+
+
+def test_if_file_exists():
+    assert PATH_TO_WORLDCITIES_FILES.exists()
+
+
+test_if_file_exists()

@@ -28,6 +28,7 @@ class BankAccount(BaseModel):
     branch_code = models.CharField(max_length=200)
     account_holder_name = models.CharField(max_length=200)
     other_bank_name = models.CharField(max_length=200)
+    # TODO: Make sure we can upload bank confirmation letter
 
 
 class Country(BaseModel):

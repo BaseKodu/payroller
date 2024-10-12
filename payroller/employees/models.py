@@ -1,4 +1,4 @@
-# ruff: noqa: DJ001
+# ruff: noqa: DJ001, E501
 
 from common.mixins import BaseModel
 from django.db import models
@@ -24,17 +24,24 @@ class Employee(BaseModel):
     dob = models.DateField(null=True, blank=True)
     rsa_id_number = models.CharField(max_length=13, null=True, blank=True)
     passport_number = models.CharField(max_length=20, null=True, blank=True)
-    company = models.ForeignKey("company.Company", on_delete=models.CASCADE, related_name="employees")  # noqa: E501
+    company = models.ForeignKey("company.Company", on_delete=models.CASCADE, related_name="employees")
     employee_code = models.CharField(max_length=200, null=True, blank=True)
     employment_date = models.DateField(null=True, blank=True)
-    gender = models.IntegerField(choices=GenderChoices, null=True, blank=True)
+    gender = models.CharField(choices=GenderChoices, max_length=1, null=True, blank=True)
     cell_no = models.CharField(max_length=20, null=True, blank=True)
     work_no = models.CharField(max_length=20, null=True, blank=True)
-    payment_method = models.CharField(choices=PaymentMethodChoices, max_length=2, null=True, blank=True)  # noqa: E501
+    payment_method = models.CharField(choices=PaymentMethodChoices, max_length=2, null=True, blank=True)
     pays_paye = models.BooleanField(null=True, blank=True)
     pays_uif = models.BooleanField(null=True, blank=True)
-    basic_salary = models.DecimalField(max_digits=21, decimal_places=4, null=True, blank=True)  # noqa: E501
+    basic_salary = models.DecimalField(max_digits=21, decimal_places=4, null=True, blank=True)
     job_title = models.CharField(max_length=200, null=True, blank=True)
+    bank_account = models.ForeignKey(
+        "misc.BankAccount",
+        on_delete=models.CASCADE,
+        related_name="employees",
+        null=True,
+        blank=True,
+    )
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
