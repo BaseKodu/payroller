@@ -96,6 +96,8 @@ LOCAL_APPS = [
     "payroller.company",
     "payroller.employees",
     "payroller.misc",
+    "payroller.payslip",
+    "payroller.paye",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
